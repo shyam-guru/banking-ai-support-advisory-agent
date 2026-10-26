@@ -182,19 +182,27 @@ banking_ai_agent/
 |   |   +-- banking_policies.md
 |   +-- customer_data/
 |   |   +-- customers.json
-|   +-- faiss_index/
-|   |   +-- banking.index
-|   |   +-- chunks.json
+|   +-- faiss_index/          # Generated locally; not committed
+|   |   +-- banking.index     # Generated FAISS index
+|   |   +-- chunks.json       # Saved document chunks and metadata
 |   +-- prompt_test_cases.json
 |   +-- evaluation_test_cases.json
 |
-+-- evidence/
++-- evidence/                 # Project evaluation evidence
 |
-+-- .env.example
++-- .env.example              # Environment variable template
 +-- .gitignore
 +-- README.md
 +-- requirements.txt
 ```
+
+### Generated Files
+
+The FAISS index files under `data/faiss_index/` are generated locally during the indexing phase and are excluded from version control. They are not included in a fresh Git clone.
+
+After installing the project dependencies and configuring the environment, run the project's document ingestion and vector-store generation scripts to create the index before running retrieval-based features. Follow the execution order documented in the setup instructions.
+
+**Security note:** The repository uses synthetic customer and branch data for demonstration. Do not add real customer information, API keys, or confidential banking records.
 
 ## 7. Knowledge Base and RAG
 
