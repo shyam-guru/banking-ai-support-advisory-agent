@@ -398,7 +398,7 @@ The deployment layer includes configuration/readiness validation, safe error han
 From the project root, run:
 
 ```powershell
-uvicorn src.api:app --reload
+python -m uvicorn api:app --app-dir src --host 127.0.0.1 --port 8000
 ```
 
 ### Interactive API Documentation
