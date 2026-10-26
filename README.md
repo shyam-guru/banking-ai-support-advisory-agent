@@ -393,11 +393,41 @@ There is no transaction-execution endpoint.
 
 The deployment layer includes configuration/readiness validation, safe error handling, safe logging, and empty-input validation.
 
-Example local startup:
+### Start the API
+
+From the project root, run:
 
 ```powershell
 uvicorn src.api:app --reload
 ```
+
+### Interactive API Documentation
+
+After starting the service, open the interactive API documentation:
+
+`http://127.0.0.1:8000/docs`
+
+### Example Chat Request
+
+Send a `POST` request to `/chat` with this JSON body:
+
+```json
+{
+  "question": "What should I do if my debit card is stolen?"
+}
+```
+
+The response contains the selected route, generated answer, and response style. The response schema is:
+
+```json
+{
+  "route": "string",
+  "answer": "string",
+  "response_style": "string"
+}
+```
+
+The actual values depend on the query and the agent's routing and response logic.
 
 ## 15. Final OpenAI Evaluation
 
@@ -496,9 +526,15 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-Create `.env` from `.env.example` and provide an OpenAI API key only when using the real OpenAI provider.
+Create a local `.env` file from the example template:
 
-Example:
+```powershell
+Copy-Item .env.example .env
+```
+
+Edit `.env` and configure the LLM provider.
+
+For the real OpenAI provider, use:
 
 ```text
 OPENAI_ENABLED=true
@@ -506,22 +542,35 @@ OPENAI_API_KEY=your_openai_api_key_here
 OPENAI_MODEL=gpt-4o-mini
 ```
 
-Never commit or submit the real `.env`.
+Replace the API key placeholder with your own key in the local `.env` file.
+
+For local testing without the OpenAI API, set `OPENAI_ENABLED=false` to use the deterministic `MockLLM` provider.
+
+Never commit or submit the real `.env` file.
+
+The `MockLLM` provides deterministic, keyword-based development responses. It does not generate responses using OpenAI and should not be used as evidence of real-LLM performance.
 
 ## 18. Running the Main RAG Test
 
-From the project root:
+The FAISS vector index and its chunk metadata must exist before the RAG test can run. These generated files are excluded from GitHub and must be recreated after cloning the repository if they are missing.
+
+From the project root, run:
 
 ```powershell
+python src\vector_store.py
 python src\rag_agent.py
 ```
 
-The current test script exercises:
+The first command loads the banking knowledge base, splits it into chunks, generates embeddings, and saves the FAISS index and chunk metadata under `data/faiss_index/`.
 
-- Stolen debit card
-- Money-transfer request
+The second command loads the index and runs four sample questions covering:
+
+- Stolen debit cards
+- Money-transfer requests
 - Legal advice
-- Sensitive information
+- Sensitive authentication information
+
+The RAG test uses the provider configured in `.env`. With `OPENAI_ENABLED=true` and a valid API key, it uses the configured OpenAI model. With `OPENAI_ENABLED=false`, it uses the deterministic `MockLLM` development provider.
 
 ## 19. Running Evaluation
 
@@ -549,16 +598,9 @@ python src\evaluate_retrieval.py
 
 The real `.env` file must not be included in the submission ZIP.
 
-Current `.gitignore` protects:
+The `.gitignore` excludes environment secrets, virtual environments, Python cache files, generated FAISS indexes, logs, and designated backup files. Review `.gitignore` for the complete set of exclusions.
 
-```text
-.venv/
-.env
-__pycache__/
-*.pyc
-vectorstore/
-logs/*.jsonl
-```
+The repository should include `.env.example`, but never the real `.env` file.
 
 The submission should include `.env.example`, not `.env`.
 

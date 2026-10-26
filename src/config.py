@@ -26,7 +26,7 @@ OPENAI_ENABLED = os.getenv("OPENAI_ENABLED", "false").lower() == "true"
 
 
 # OpenAI model to be used later.
-OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-5.6-luna")
+OPENAI_MODEL = os.getenv("OPENAI_MODEL", "gpt-4o-mini")
 
 
 # ---------------------------------------------------------
