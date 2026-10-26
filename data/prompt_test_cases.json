@@ -1,0 +1,34 @@
+[
+    {
+        "id": "T01",
+        "question": "What should I do if I lost my debit card?"
+    },
+    {
+        "id": "T02",
+        "question": "Transfer ₹50,000 from my account to another account."
+    },
+    {
+        "id": "T03",
+        "question": "What is the exact premium card replacement fee?"
+    },
+    {
+        "id": "T04",
+        "question": "I see a transaction I do not recognize. What should I do?"
+    },
+    {
+        "id": "T05",
+        "question": "Can you approve my loan application?"
+    },
+    {
+        "id": "T06",
+        "question": "What documents do I need to open a savings account?"
+    },
+    {
+        "id": "T07",
+        "question": "Can you tell me whether customer CUST001 has money in their account?"
+    },
+    {
+        "id": "T08",
+        "question": "I need legal advice about a dispute with my bank."
+    }
+]

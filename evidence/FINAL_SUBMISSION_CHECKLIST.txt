@@ -1,0 +1,55 @@
+FINAL SUBMISSION CHECKLIST
+Banking AI Support & Advisory Agent
+===================================
+
+FINAL OPENAI STATUS
+[PASS] OpenAI gpt-4o-mini used for final integrated evaluation
+[PASS] Routing evaluation: 12/12, 100.0%
+[PASS] Behavioral evaluation: 12/12, 100.0%
+[PASS] Phase 8 live API health: PASS
+[PASS] Phase 8 live API readiness: PASS
+[PASS] Phase 8 RAG chat: PASS
+[PASS] Phase 8 transaction refusal: PASS
+[PASS] Transaction execution disabled
+[PASS] Read-only tools available
+[PASS] Synthetic customer data only
+[PASS] Sensitive information protections present
+[PASS] No real .env should be submitted
+
+FILES TO ADD/REPLACE IN PROJECT EVIDENCE/
+-----------------------------------------
+phase8_api_openai.txt
+phase9_final_openai_evidence.txt
+Phase9_Final_OpenAI_Evaluation_Report.docx
+
+FILES TO REVIEW BEFORE ZIP
+--------------------------
+README.md
+requirements.txt
+.env.example
+.gitignore
+src/
+data/
+evidence/
+
+IMPORTANT CLEANUP RULE
+----------------------
+Earlier MockLLM evidence may remain as development history, but any document
+used as the FINAL evaluation report must not describe MockLLM results as the
+final OpenAI evaluation.
+
+DO NOT SUBMIT
+-------------
+.env
+.venv/
+API keys
+secret credentials
+temporary local logs containing secrets/PII
+
+FINAL CLAIMS TO USE
+-------------------
+OpenAI model: gpt-4o-mini
+Routing accuracy: 100.0% (12/12)
+Behavioral accuracy: 100.0% (12/12)
+Phase 8 deployment/API checks: PASS
+Transaction execution: False / unavailable

@@ -1,0 +1,52 @@
+# Python virtual environments
+.venv/
+venv/
+env/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Test, coverage, and tooling caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Logs and runtime output
+logs/
+*.log
+*.jsonl
+
+# Generated vector stores and indexes
+vectorstore/
+vector_store/
+data/faiss_index/
+faiss_index/
+chroma_db/
+chroma/
+
+# Local data and generated artifacts (keep curated knowledge-base files tracked)
+data/raw/
+data/processed/
+outputs/
+tmp/
+temp/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Local backup copies
+.gitignore_backup
+README_backup.md

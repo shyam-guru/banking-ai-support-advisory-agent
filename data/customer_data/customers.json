@@ -1,0 +1,36 @@
+[
+    {
+        "customer_id": "CUST001",
+        "customer_name": "Demo Customer 001",
+        "account_type": "Savings",
+        "account_status": "Active",
+        "branch": "Chennai Main Branch",
+        "eligible_services": [
+            "Savings Account Services",
+            "Debit Card Services",
+            "Online Banking Support"
+        ]
+    },
+    {
+        "customer_id": "CUST002",
+        "customer_name": "Demo Customer 002",
+        "account_type": "Current",
+        "account_status": "Active",
+        "branch": "Chennai Anna Nagar Branch",
+        "eligible_services": [
+            "Current Account Services",
+            "Debit Card Services",
+            "Online Banking Support"
+        ]
+    },
+    {
+        "customer_id": "CUST003",
+        "customer_name": "Demo Customer 003",
+        "account_type": "Savings",
+        "account_status": "Inactive",
+        "branch": "Chennai Adyar Branch",
+        "eligible_services": [
+            "Account Support"
+        ]
+    }
+]

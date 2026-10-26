@@ -1,0 +1,11 @@
+# Banking AI Support & Advisory Agent
+langchain==1.4.2
+langchain-openai==1.6.6
+openai==3.19.2
+python-dotenv==1.2.3
+langchain-community
+langchain-text-splitters
+faiss-cpu
+sentence-transformers
+fastapi==0.141.1
+uvicorn==0.54.0
