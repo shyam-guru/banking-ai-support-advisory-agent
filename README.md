@@ -46,50 +46,85 @@ The project follows this principle:
 
 ## 4. Architecture
 
-Main RAG pipeline:
+### 4.1 System Architecture
 
-```text
-User Query
-    |
-    v
-FAISS Retriever
-    |
-    v
-Top-K Knowledge Chunks
-    |
-    v
-Grounded Context
-    |
-    v
-Safety + Grounding Prompt
-    |
-    v
-LLM Provider
-    |
-    v
-Banking Response
+```mermaid
+flowchart TD
+    U["User"] --> API["FastAPI Interface"]
+    API --> A["Banking AI Support & Advisory Agent"]
+
+    A --> Q["Query Processing"]
+    Q --> R["RAG Retrieval Pipeline"]
+
+    R --> KB["Banking Policy Knowledge Base"]
+    KB --> SPLIT["Document Loading & Chunking"]
+    SPLIT --> EMB["Sentence Transformer Embeddings"]
+    EMB --> FAISS["FAISS Vector Index"]
+
+    FAISS --> RET["Relevant Policy Chunks"]
+    RET --> PROMPT["Prompt Construction"]
+
+    PROMPT --> LLM["LLM Provider"]
+    LLM --> OPENAI["OpenAI GPT-4o-mini"]
+    LLM --> MOCK["MockLLM Fallback"]
+
+    A --> TOOLS["Read-only Banking Tools"]
+    A --> MEM["Short-term Conversation Memory"]
+    A --> SAFE["Safety Guardrails & Escalation"]
+
+    TOOLS --> DATA["Synthetic Customer & Branch Data"]
+    OPENAI --> SAFE
+    MOCK --> SAFE
+    SAFE --> RESP["Validated Response"]
+    RESP --> API
+    API --> U
 ```
 
-Broader agent:
+### 4.2 RAG Pipeline
 
-```text
-User
- |
- v
-Safety / Intent Routing
- |
- +--> SAFETY_REFUSAL
- |
- +--> CUSTOMER_LOOKUP --------> Synthetic Customer Tool
- |
- +--> BRANCH_LOOKUP ----------> Synthetic Branch Tool
- |
- +--> CUSTOMER_DATA_UNAVAILABLE
- |
- +--> RAG --------------------> FAISS + KB + LLM
- |
- v
-Response / Escalation
+```mermaid
+flowchart LR
+    DOC["Banking Policy Documents"] --> LOAD["Document Loader"]
+    LOAD --> SPLIT["Text Splitter"]
+    SPLIT --> CHUNKS["Text Chunks"]
+    CHUNKS --> EMB["Sentence Transformers"]
+    EMB --> INDEX["FAISS Vector Index"]
+
+    USER["User Query"] --> QUERY["Query Processing"]
+    QUERY --> QEMB["Query Embedding"]
+    QEMB --> SEARCH["Similarity Search"]
+    INDEX --> SEARCH
+
+    SEARCH --> CONTEXT["Top-K Relevant Chunks"]
+    CONTEXT --> PROMPT["Prompt + Retrieved Context"]
+    PROMPT --> LLM["LLM Response Generation"]
+    LLM --> ANSWER["Banking Support Answer"]
+```
+
+### 4.3 Agent Workflow and Safety
+
+```mermaid
+flowchart TD
+    START["Receive User Query"] --> CLASSIFY["Understand Query Intent"]
+    CLASSIFY --> RETRIEVE["Retrieve Relevant Policy Context"]
+    CLASSIFY --> TOOLCHECK{"Is a Read-only Tool Needed?"}
+
+    TOOLCHECK -->|Yes| TOOL["Call Approved Banking Tool"]
+    TOOL --> RESULT["Tool Result"]
+    TOOLCHECK -->|No| CONTEXT["Use Retrieved Context"]
+    RESULT --> CONTEXT
+
+    RETRIEVE --> CONTEXT
+    CONTEXT --> GENERATE["Generate Response"]
+    GENERATE --> SAFETY{"Safety and Policy Checks"}
+
+    SAFETY -->|Pass| RESPOND["Respond to User"]
+    SAFETY -->|Escalation Required| ESCALATE["Recommend Human Support"]
+    SAFETY -->|Unsafe or Unsupported| REFUSE["Refuse or Explain Limitation"]
+
+    RESPOND --> MEMORY["Update Short-term Conversation Context"]
+    ESCALATE --> MEMORY
+    REFUSE --> MEMORY
 ```
 
 ## 5. Technology Stack
