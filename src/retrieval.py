@@ -24,13 +24,11 @@ from embeddings import LocalEmbeddings
 # Configuration
 # ============================================================
 
-INDEX_FILE = Path(
-    "data/faiss_index/banking.index"
-)
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+INDEX_DIR = PROJECT_ROOT / "data" / "faiss_index"
 
-CHUNKS_FILE = Path(
-    "data/faiss_index/chunks.json"
-)
+INDEX_FILE = INDEX_DIR / "banking.index"
+CHUNKS_FILE = INDEX_DIR / "chunks.json"
 
 
 # ============================================================

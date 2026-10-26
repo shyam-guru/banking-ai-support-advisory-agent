@@ -26,7 +26,8 @@ from loader import load_knowledge_base
 # Configuration
 # ============================================================
 
-INDEX_DIR = Path("data/faiss_index")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
+INDEX_DIR = PROJECT_ROOT / "data" / "faiss_index"
 
 INDEX_FILE = INDEX_DIR / "banking.index"
 

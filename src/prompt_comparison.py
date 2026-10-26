@@ -20,11 +20,10 @@ from prompts import PROMPT_V1, PROMPT_V2, PROMPT_V3
 # Paths
 # ---------------------------------------------------------
 
-TEST_FILE = Path("data/prompt_test_cases.json")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 
-OUTPUT_FILE = Path(
-    "evidence/prompt_comparison_results.json"
-)
+TEST_FILE = PROJECT_ROOT / "data" / "prompt_test_cases.json"
+OUTPUT_FILE = PROJECT_ROOT / "evidence" / "prompt_comparison_results.json"
 
 
 # ---------------------------------------------------------
